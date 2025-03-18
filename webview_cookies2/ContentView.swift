@@ -55,6 +55,13 @@ struct ContentView: View {
                     .disabled(isLoading)
                 }
             }
+            .overlay {
+                if isLoading {
+                    LoadingView()
+                        .transition(.opacity)
+                }
+            }
+            .animation(.default, value: isLoading)
         }
     }
 }
@@ -63,7 +70,7 @@ struct ContentView: View {
 struct LoadingView: View {
     var body: some View {
         ZStack {
-            Color.black.opacity(0.2)
+            Color.black.opacity(0.5)
                 .edgesIgnoringSafeArea(.all)
             
             VStack {

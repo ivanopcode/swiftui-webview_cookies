@@ -60,8 +60,7 @@ struct WebViewContainer: UIViewRepresentable {
                 .path: "/",
                 .name: cookieName,
                 .value: cookieValue,
-                .secure: "TRUE",
-                .expires: Date(timeIntervalSinceNow: 31536000) // 1 year
+                .secure: "TRUE"
             ]) {
                 dispatchGroup.enter()
                 dataStore.httpCookieStore.setCookie(cookie) {
@@ -79,25 +78,27 @@ struct WebViewContainer: UIViewRepresentable {
     // For "https://delivery.publix.com/store/publix/storefront" => "delivery.publix.com"
     private func domainFromUrl(_ urlString: String) -> String? {
         guard let host = URL(string: urlString)?.host else { return nil }
-        return host
+        return ".\(host)"
     }
     
     // Escape strings for JavaScript
+    // The function might miss edge cases, such as Unicode characters or other special characters that could break JavaScript strings.
+    // A more comprehensive escaping solution (e.g., using a library or additional replacements) could enhance robustness.
     private func escapeJavaScriptString(_ string: String) -> String {
-        // avoid double escaping
-        var escaped = string.replacingOccurrences(of: "\\", with: "\\\\")
-        
-        // quotes
-        escaped = escaped.replacingOccurrences(of: "'", with: "\\'")
-        escaped = escaped.replacingOccurrences(of: "\"", with: "\\\"")
-        
-        //line breaks and other control characters
-        escaped = escaped.replacingOccurrences(of: "\n", with: "\\n")
-        escaped = escaped.replacingOccurrences(of: "\r", with: "\\r")
-        escaped = escaped.replacingOccurrences(of: "\t", with: "\\t")
-        escaped = escaped.replacingOccurrences(of: "\u{000C}", with: "\\f") // Form feed
-        escaped = escaped.replacingOccurrences(of: "\u{0008}", with: "\\b") // Backspace
-        
+        var escaped = string
+        let replacements = [
+            "\\": "\\\\",
+            "'": "\\'",
+            "\"": "\\\"",
+            "\n": "\\n",
+            "\r": "\\r",
+            "\t": "\\t",
+            "\u{000C}": "\\f",
+            "\u{0008}": "\\b"
+        ]
+        for (char, escape) in replacements {
+            escaped = escaped.replacingOccurrences(of: char, with: escape)
+        }
         return escaped
     }
     
@@ -123,26 +124,22 @@ struct WebViewContainer: UIViewRepresentable {
             guard !parent.viewModel.sessionObject.localStorage.isEmpty else { return }
             
             // Wait for document to be fully ready before injecting
-            let readyCheckScript = """
-    (function() {
-        if (document.readyState === 'complete') {
-            return true;
-        } else {
-            return false;
-        }
-    })();
-    """
+            let readyCheckScript =
+               """
+               (function() {
+               return new Promise(resolve => {
+               if (document.readyState === 'complete') {
+               resolve(true);
+               } else {
+               window.addEventListener('load', () => resolve(true));
+               }
+               });
+               })();
+               """
             
             webView.evaluateJavaScript(readyCheckScript) { [weak self] (result, error) in
                 guard let self else { return }
-                if let isReady = result as? Bool, isReady {
-                    self.injectLocalStorage(webView, localStorage: self.parent.viewModel.sessionObject.localStorage)
-                } else {
-                    // Document not ready, wait and try again
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        self.injectLocalStorage(webView, localStorage: self.parent.viewModel.sessionObject.localStorage)
-                    }
-                }
+                self.injectLocalStorage(webView, localStorage: self.parent.viewModel.sessionObject.localStorage)
             }
         }
         
@@ -163,7 +160,8 @@ struct WebViewContainer: UIViewRepresentable {
         // Handle navigation failures
         func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
             parent.isLoading = false
-            // error handling
+            print("Navigation failed: \(error.localizedDescription)")
+            // Notify user or retry logic here
         }
         
         // Handle errors during initial load
