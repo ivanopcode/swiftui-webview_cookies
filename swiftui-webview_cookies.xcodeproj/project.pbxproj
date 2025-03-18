@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		57C0291D2D8A102A001F017D /* webview_cookies2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = webview_cookies2.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		57C0291D2D8A102A001F017D /* swiftui-webview_cookies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "swiftui-webview_cookies.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		57C0291F2D8A102A001F017D /* webview_cookies2 */ = {
+		57C0291F2D8A102A001F017D /* webview_cookies */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = webview_cookies2;
+			path = webview_cookies;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -32,7 +32,7 @@
 		57C029142D8A102A001F017D = {
 			isa = PBXGroup;
 			children = (
-				57C0291F2D8A102A001F017D /* webview_cookies2 */,
+				57C0291F2D8A102A001F017D /* webview_cookies */,
 				57C0291E2D8A102A001F017D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -40,7 +40,7 @@
 		57C0291E2D8A102A001F017D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				57C0291D2D8A102A001F017D /* webview_cookies2.app */,
+				57C0291D2D8A102A001F017D /* swiftui-webview_cookies.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -48,9 +48,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		57C0291C2D8A102A001F017D /* webview_cookies2 */ = {
+		57C0291C2D8A102A001F017D /* swiftui-webview_cookies */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 57C0292B2D8A102B001F017D /* Build configuration list for PBXNativeTarget "webview_cookies2" */;
+			buildConfigurationList = 57C0292B2D8A102B001F017D /* Build configuration list for PBXNativeTarget "swiftui-webview_cookies" */;
 			buildPhases = (
 				57C029192D8A102A001F017D /* Sources */,
 				57C0291A2D8A102A001F017D /* Frameworks */,
@@ -61,13 +61,13 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				57C0291F2D8A102A001F017D /* webview_cookies2 */,
+				57C0291F2D8A102A001F017D /* webview_cookies */,
 			);
-			name = webview_cookies2;
+			name = "swiftui-webview_cookies";
 			packageProductDependencies = (
 			);
 			productName = webview_cookies2;
-			productReference = 57C0291D2D8A102A001F017D /* webview_cookies2.app */;
+			productReference = 57C0291D2D8A102A001F017D /* swiftui-webview_cookies.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -85,7 +85,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 57C029182D8A102A001F017D /* Build configuration list for PBXProject "webview_cookies2" */;
+			buildConfigurationList = 57C029182D8A102A001F017D /* Build configuration list for PBXProject "swiftui-webview_cookies" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -99,7 +99,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				57C0291C2D8A102A001F017D /* webview_cookies2 */,
+				57C0291C2D8A102A001F017D /* swiftui-webview_cookies */,
 			);
 		};
 /* End PBXProject section */
@@ -305,7 +305,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		57C029182D8A102A001F017D /* Build configuration list for PBXProject "webview_cookies2" */ = {
+		57C029182D8A102A001F017D /* Build configuration list for PBXProject "swiftui-webview_cookies" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				57C029292D8A102B001F017D /* Debug */,
@@ -314,7 +314,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		57C0292B2D8A102B001F017D /* Build configuration list for PBXNativeTarget "webview_cookies2" */ = {
+		57C0292B2D8A102B001F017D /* Build configuration list for PBXNativeTarget "swiftui-webview_cookies" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				57C0292C2D8A102B001F017D /* Debug */,
